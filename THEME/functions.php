@@ -151,6 +151,82 @@ class _V {
 	 */
 	function admin_print_styles() { wp_enqueue_style('thickbox'); }
 	/**
+	 *	@function	admin_print_styles
+	 *	@params 	void
+	 *	@return 	void
+	 */
+	function admin_head() {  
+		?>
+		<style type="text/css">
+		/*
+		 * Inner container to allow for even spacing of forms and settings. 
+		 */
+		.inner_container:before, .inner_container:after { content: '.'; display: block; overflow: hidden; visibility: hidden; font-size: 0; line-height: 0; width: 0; height: 0; }
+		.inner_container:after { clear: both; }
+		.inner_container { zoom: 1; width: 102%; margin-left: -1%; }
+
+		[class*="col_"] { display: inline; float: left; margin-right: 1%; margin-left: 1%; }
+		.col_1of4 { width: 23%; }
+		.col_2of4 { width: 48%; }
+		.col_3of4 { width: 73%; }
+		.col_1of2 { width: 48%; }
+		.col_1of3 { width: 31.33333333333333%; }
+		.col_2of3 { width: 64.6666666666666%; }
+		.col_1of1 { width: 98%; }
+		.col_1of5 { width: 18%; }
+		.col_2of5 { width: 38%; }
+		.col_3of5 { width: 58%; }
+		.col_4of5 { width: 78%; }
+
+		/*
+		 *	Classes set to extend wordpresses default
+		 */
+
+		.button-secondary {  }
+
+		.wp-core-ui .button-secondary {
+			background: #dd1a2e;
+			background: -moz-linear-gradient(top, #dd1a2e 0%, #a01315 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dd1a2e), color-stop(100%,#a01315));
+			background: -webkit-linear-gradient(top, #dd1a2e 0%,#a01315 100%);
+			background: -o-linear-gradient(top, #dd1a2e 0%,#a01315 100%);
+			background: -ms-linear-gradient(top, #dd1a2e 0%,#a01315 100%);
+			background: linear-gradient(to bottom, #dd1a2e 0%,#a01315 100%);
+			border-color: #A01315;
+			border-bottom-color: #A01315;
+			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+			color: #FFF;
+			text-decoration: none;
+			text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+		}
+
+		.wp-core-ui .button-secondary.hover, .wp-core-ui .button-secondary:hover, .wp-core-ui .button-secondary.focus, .wp-core-ui .button-secondary:focus {
+			background: #dd1a2e;
+			background: -moz-linear-gradient(top, #dd1a2e 0%, #891010 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dd1a2e), color-stop(100%,#891010));
+			background: -webkit-linear-gradient(top, #dd1a2e 0%,#891010 100%);
+			background: -o-linear-gradient(top, #dd1a2e 0%,#891010 100%);
+			background: -ms-linear-gradient(top, #dd1a2e 0%,#891010 100%);
+			background: linear-gradient(to bottom, #dd1a2e 0%,#891010 100%);
+			border-color: #891010;
+			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+			color: #FFF;
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3); 
+		}
+
+
+		</style>		
+		<script type="text/javascript">
+		 	$_=jQuery.noConflict();
+			$_(document).ready(function() {
+
+			});
+		</script>
+		<?php
+	}
+	/**
 	 *	@function	widgets_and_sidebar
 	 *	@params 	void
 	 *	@return 	void
