@@ -8,6 +8,10 @@ define('_V_TEMPLATE_DIR_IMAGES', _V_TEMPLATE_DIR.'/images');
 if(!class_exists('_V')):
 class _V {
 
+	function __construct(  ) {
+		// Define option vars here
+	}
+
 	/**
 	 *	@function	verify_null
 	 *	@params 	<post_id:int> is the post id
@@ -269,18 +273,17 @@ global $_V;
 else : exit("Class '_V' already exists"); endif;
 if (isset($_V)) {
 	if (is_admin()) {
-		/* ADMIN ACTIONS */
 		add_action('admin_menu', array(&$_V, 'admin_menu'));
 		add_action("admin_head", array(&$_V, "admin_head"),7);
 		add_action('admin_print_styles', array(&$_V, 'admin_print_styles'));
 		add_action('admin_print_scripts', array(&$_V, 'admin_print_scripts'));
 	}
-	/* GLOBAL ACTIONS */
 	add_action('init',array(&$_V,'initialize'));
 	add_action('widgets_init', array(&$_V, 'widgets_and_sidebar'));
 	add_action('wp_print_scripts', array(&$_V, 'print_scripts'));
 	add_action('wp_dashboard_setup', array(&$_V, 'reconfigure_dashboard'));
 }
+
 require_once('functions-widgets.php');
 
 ?>

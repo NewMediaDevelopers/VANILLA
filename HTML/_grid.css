@@ -1,4 +1,4 @@
-/* INNER GRID ~ Written by Tyler Fry */
+/* Inner Container */
 .inner_container:before, .inner_container:after { content: '.'; display: block; overflow: hidden; visibility: hidden; font-size: 0; line-height: 0; width: 0; height: 0; }
 .inner_container:after { clear: both; }
 .inner_container { zoom: 1; width: 102%; margin-left: -1%; }
@@ -21,7 +21,6 @@
 }
 
 /* 960 Grid System ~ Core CSS. Learn more ~ http://960.gs/ Licensed under GPL and MIT. */
-/* MODIFIED by Tyler Fry */
 /* Container */
 .container { margin-left: auto; margin-right: auto; width: 960px; }
 
