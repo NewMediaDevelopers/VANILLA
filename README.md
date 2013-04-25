@@ -1,4 +1,4 @@
-CRG Vanilla Templates
+Vanilla Templates
 =====================
 
 ## Wordpress THEME

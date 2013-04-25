@@ -9,28 +9,6 @@ if(!class_exists('_V')):
 class _V {
 
 	/**
-	 *	@function	french_enabled
-	 *	@params 	none
-	 *	@return 	bool - <true> if language toggle enabled, <false> otherwise
-	 */
-	function french_enabled() { global $q_config; if ($q_config['language']) { return true; } return false; }
-
-	/**
-	 *	@function	translate
-	 *	@params 	<e:string> contains the english content
-	 *				<f:string> contains the french content
-	 *	@return 	string - <f:string> if language toggle is set to <french>, <e:string> otherwise
-	 */
-	function translate($e=NULL,$f=NULL) { global $q_config; $t = $e; if ($q_config['language'] == "fr") { $t = $f; } return $t; }
-
-	/**
-	 *	@function	clean_post
-	 *	@params 	<p:string> contains the content
-	 *	@return 	string - <p:string> having been run through <func:strip_tags>, <func:stripslashes>, and <func:trim>
-	 */
-	function clean_post($p) { $p = strip_tags($p); $p = stripslashes($p); $p = trim($p); return $p; }
-
-	/** ?
 	 *	@function	verify_null
 	 *	@params 	<post_id:int> is the post id
 	 *				<n:string> is the name
@@ -151,77 +129,18 @@ class _V {
 	 */
 	function admin_print_styles() { wp_enqueue_style('thickbox'); }
 	/**
-	 *	@function	admin_print_styles
+	 *	@function	admin_head
 	 *	@params 	void
 	 *	@return 	void
 	 */
 	function admin_head() {  
 		?>
 		<style type="text/css">
-		/*
-		 * Inner container to allow for even spacing of forms and settings. 
-		 */
-		.inner_container:before, .inner_container:after { content: '.'; display: block; overflow: hidden; visibility: hidden; font-size: 0; line-height: 0; width: 0; height: 0; }
-		.inner_container:after { clear: both; }
-		.inner_container { zoom: 1; width: 102%; margin-left: -1%; }
-
-		[class*="col_"] { display: inline; float: left; margin-right: 1%; margin-left: 1%; }
-		.col_1of4 { width: 23%; }
-		.col_2of4 { width: 48%; }
-		.col_3of4 { width: 73%; }
-		.col_1of2 { width: 48%; }
-		.col_1of3 { width: 31.33333333333333%; }
-		.col_2of3 { width: 64.6666666666666%; }
-		.col_1of1 { width: 98%; }
-		.col_1of5 { width: 18%; }
-		.col_2of5 { width: 38%; }
-		.col_3of5 { width: 58%; }
-		.col_4of5 { width: 78%; }
-
-		/*
-		 *	Classes set to extend wordpresses default
-		 */
-
-		.button-secondary {  }
-
-		.wp-core-ui .button-secondary {
-			background: #dd1a2e;
-			background: -moz-linear-gradient(top, #dd1a2e 0%, #a01315 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dd1a2e), color-stop(100%,#a01315));
-			background: -webkit-linear-gradient(top, #dd1a2e 0%,#a01315 100%);
-			background: -o-linear-gradient(top, #dd1a2e 0%,#a01315 100%);
-			background: -ms-linear-gradient(top, #dd1a2e 0%,#a01315 100%);
-			background: linear-gradient(to bottom, #dd1a2e 0%,#a01315 100%);
-			border-color: #A01315;
-			border-bottom-color: #A01315;
-			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-			color: #FFF;
-			text-decoration: none;
-			text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-		}
-
-		.wp-core-ui .button-secondary.hover, .wp-core-ui .button-secondary:hover, .wp-core-ui .button-secondary.focus, .wp-core-ui .button-secondary:focus {
-			background: #dd1a2e;
-			background: -moz-linear-gradient(top, #dd1a2e 0%, #891010 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dd1a2e), color-stop(100%,#891010));
-			background: -webkit-linear-gradient(top, #dd1a2e 0%,#891010 100%);
-			background: -o-linear-gradient(top, #dd1a2e 0%,#891010 100%);
-			background: -ms-linear-gradient(top, #dd1a2e 0%,#891010 100%);
-			background: linear-gradient(to bottom, #dd1a2e 0%,#891010 100%);
-			border-color: #891010;
-			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-			color: #FFF;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3); 
-		}
-
 
 		</style>		
 		<script type="text/javascript">
 		 	$_=jQuery.noConflict();
 			$_(document).ready(function() {
-
 			});
 		</script>
 		<?php
@@ -290,23 +209,42 @@ class _V {
 	 *	@return 	void
 	 */
 	function register_my_menu() { register_nav_menu('nav-menu', __('Navigation Menu')); }
+
 	/**
-	 *	@function	admin_scripts
-	 *	@params 	void
-	 *	@return 	void
-	 */
-	function admin_scripts() {
-		?>	
-		<style type="text/css">
+	 *	@function	admin_menu
+	 *	@params 	<void>
+	 *	@return 	<void>
+	 */	
+	function admin_menu() { @$this->menu_pages(); }
+	
+	/**
+	 *	@function	menu_pages
+	 *	@params 	<void>
+	 *	@return 	<void>
+	 */	
+	function menu_pages() {
+		add_menu_page('General Settings', 'General Settings', 'administrator', 'general_settings', array($this,'menu_page_general'));
+	}
 
-		</style>
-		<script type="text/javascript">
-		 	$js_=jQuery.noConflict();
-			$js_(document).ready(function() {
 
-			});
-		</script>
-		<?php
+	/**
+	 *	@function	menu_page_general
+	 *	@params 	<void>
+	 *	@return 	<void>
+	 */	
+	function menu_page_general() {
+
+		if( class_exists( 'Q8_BLOCK' )):
+			$block = new Q8_BLOCK();
+			$block->add_tab('general_settings_example','General Settings Example',array(&$this,'general_settings_example'));
+			$block->draw_block('General Settings','Theme: _V','An awesome sauce Block for settings');
+		else:
+			echo '<div id="message" class="updated">Please install Q8 Core</div>';
+		endif;		
+	}
+
+	function general_settings_example(){
+
 	}
 
 	/*
@@ -332,7 +270,8 @@ else : exit("Class '_V' already exists"); endif;
 if (isset($_V)) {
 	if (is_admin()) {
 		/* ADMIN ACTIONS */
-		add_action("admin_head", array($_V, "admin_scripts"),7);
+		add_action('admin_menu', array(&$_V, 'admin_menu'));
+		add_action("admin_head", array(&$_V, "admin_head"),7);
 		add_action('admin_print_styles', array(&$_V, 'admin_print_styles'));
 		add_action('admin_print_scripts', array(&$_V, 'admin_print_scripts'));
 	}
@@ -343,4 +282,5 @@ if (isset($_V)) {
 	add_action('wp_dashboard_setup', array(&$_V, 'reconfigure_dashboard'));
 }
 require_once('functions-widgets.php');
+
 ?>
